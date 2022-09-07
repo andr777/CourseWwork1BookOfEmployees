@@ -1,10 +1,12 @@
+import java.util.Objects;
+
 public class Employee {
-    String surname;         // фамилия
-    String name;            // имя
-    String patronymic;      // отчество
-    String department;      // отдел
-    double salary;          // зарплата
-    int id;                 // номер
+    private String surname;         // фамилия
+    private String name;            // имя
+    private String patronymic;      // отчество
+    private String department;      // отдел
+    private double salary;          // зарплата
+    private int id;                 // номер
 
 
     public Employee(String surname, String name, String patronymic, String department, double salary) {
@@ -65,9 +67,32 @@ public class Employee {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return "id=" + id +
+                ",  Фамилия='" + surname + '\'' +
+                ",  Имя='" + name + '\'' +
+                ",  Отчество='" + patronymic + '\'' +
+                ",  Отдел='" + department + '\'' +
+                ",  Зарплата=" + salary
+                ;
+    }
 
+    public String toStringFullName() {
+        return surname + ' ' + name + ' ' + patronymic + ' ';
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Employee employee = (Employee) o;
+        return Double.compare(employee.salary, salary) == 0 && id == employee.id && Objects.equals(surname, employee.surname) && Objects.equals(name, employee.name) && Objects.equals(patronymic, employee.patronymic) && Objects.equals(department, employee.department);
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(surname, name, patronymic, department, salary, id);
+    }
 
 
     /* FULL NAME.
